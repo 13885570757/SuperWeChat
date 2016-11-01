@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
-import com.baidu.platform.comapi.map.L;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -23,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 import cn.ucai.superwechat.I;
 import cn.ucai.superwechat.SuperWeChatApplication;
 import cn.ucai.superwechat.bean.Result;
+import cn.ucai.superwechat.utils.L;
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;

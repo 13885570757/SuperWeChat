@@ -36,12 +36,11 @@ public class NetDao {
      * @param username
      * @param listener
      */
-    public static void register(Context mContext, String username,OkHttpUtils.OnCompleteListener<Result> listener) {
+    public static void unregister(Context mContext, String username,OkHttpUtils.OnCompleteListener<Result> listener) {
         OkHttpUtils<Result> utils = new OkHttpUtils<>(mContext);
         utils.setRequestUrl(I.REQUEST_UNREGISTER)
                 .addParam(I.User.USER_NAME, username)
                 .targetClass(Result.class)
-                .post()
                 .execute(listener);
     }
 
