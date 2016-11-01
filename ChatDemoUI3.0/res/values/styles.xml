@@ -13,11 +13,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@style/AnimFade2</item>
     </style>
-<!-- 我的自定义标题栏-->
-    <style name="my_title"
-        parent="android:Theme">
-           <item name="android:windowTitleSize">50dp</item>
-    </style>
+
     <style name="AppTheme.TransparentActivity">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>

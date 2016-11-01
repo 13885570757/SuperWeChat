@@ -22,8 +22,10 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
+
+
     defaultConfig {
-        applicationId "com.hyphenate.chatuidemo"
+        applicationId "cn.ucai.superwechat"
         minSdkVersion 15
         targetSdkVersion 23
         multiDexEnabled true
@@ -71,5 +73,5 @@ dependencies {
     //        exclude module: 'support-v4'
     //    }
     compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.jakewharton:butterknife:8.4.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
 }

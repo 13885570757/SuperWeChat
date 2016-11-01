@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#222325"
-    tools:context=".ui.WelcomeActivity">
+    tools:context="cn.ucai.superwechat.ui.WelcomeActivity">
 
     <ImageView
         android:layout_gravity="center"

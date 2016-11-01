@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="#eee"
@@ -33,7 +33,7 @@
 
     </RelativeLayout>
     <EditText
-        android:id="@+id/login_user_edit"
+        android:id="@+id/username"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_top_layout"
@@ -46,7 +46,7 @@
         android:background="@drawable/login_editbox"
         android:hint="QQ号/微信号/手机号"/>
     <EditText
-        android:id="@+id/login_passwd_edit"
+        android:id="@+id/password"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_user_edit"
@@ -98,4 +98,4 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
-</RelativeLayout>
+</LinearLayout>
