@@ -5,33 +5,7 @@
               android:background="#eee"
               android:orientation="vertical"
               android:gravity="center_horizontal">
-    <RelativeLayout
-        android:id="@+id/login_top_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/title_bar">
-        <Button
-            android:id="@+id/reback_btn"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="返回"
-            android:textSize="14sp"
-            android:textColor="#fff"
-            android:onClick="login_back"
-            android:background="@drawable/title_btn_back"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#ffffff"
-            android:text="注册"
-            />
-
-    </RelativeLayout>
+    <include layout="@layout/view_title_bar"/>
     <EditText
         android:id="@+id/et_username"
         android:layout_width="fill_parent"

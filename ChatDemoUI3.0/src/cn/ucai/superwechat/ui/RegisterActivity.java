@@ -19,6 +19,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hyphenate.EMError;
@@ -34,6 +36,7 @@ import cn.ucai.superwechat.SuperWeChatHelper;
 import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.net.NetDao;
 import cn.ucai.superwechat.net.OkHttpUtils;
+import cn.ucai.superwechat.utils.CommonUtils;
 import cn.ucai.superwechat.utils.L;
 import cn.ucai.superwechat.utils.MFGT;
 
@@ -41,8 +44,6 @@ import cn.ucai.superwechat.utils.MFGT;
  * register screen
  */
 public class RegisterActivity extends BaseActivity {
-    @Bind(R.id.reback_btn)
-    Button rebackBtn;
     @Bind(R.id.et_username)
     EditText etUsername;
     @Bind(R.id.et_usernick)
@@ -61,6 +62,10 @@ public class RegisterActivity extends BaseActivity {
 
     RegisterActivity mContext;
     ProgressDialog pd = null;
+    @Bind(R.id.img_back)
+    ImageView imgBack;
+    @Bind(R.id.txt_title)
+    TextView txtTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +80,9 @@ public class RegisterActivity extends BaseActivity {
      * 自定义布局Style
      */
     private void initview() {
-
+        imgBack.setVisibility(View.VISIBLE);
+        txtTitle.setVisibility(View.VISIBLE);
+        txtTitle.setText(R.string.register);
     }
 
 
@@ -126,17 +133,16 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onSuccess(Result result) {
                 if (result == null) {
-                   pd.dismiss();
+                    pd.dismiss();
                     Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                }else {
-                    if (result.isRetMsg()){
+                } else {
+                    if (result.isRetMsg()) {
                         registerEMServer();//环信服务器上注册
-                    }
-                    else {
-                        if (result.getRetCode()== I.MSG_REGISTER_USERNAME_EXISTS){//存在该用户
-                            cn.ucai.superwechat.utils.CommonUtils.showLongToast(result.getRetCode());
+                    } else {
+                        if (result.getRetCode() == I.MSG_REGISTER_USERNAME_EXISTS) {//存在该用户
+                            CommonUtils.showLongToast(result.getRetCode());
                             pd.dismiss();
-                        }else {//取消注册
+                        } else {//取消注册
                             unregisterAppServer();
                         }
                     }
@@ -166,7 +172,7 @@ public class RegisterActivity extends BaseActivity {
 
             @Override
             public void onError(String error) {
-            pd.dismiss();
+                pd.dismiss();
             }
         });
     }
@@ -224,10 +230,10 @@ public class RegisterActivity extends BaseActivity {
         MFGT.finish(this);
     }
 
-    @OnClick({R.id.reback_btn, R.id.register})
+    @OnClick({R.id.img_back, R.id.register})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.reback_btn://点击返回，结束当前活动
+            case R.id.img_back://点击返回，结束当前活动
                 MFGT.finish(this);
                 break;
             case R.id.register://点击注册
