@@ -134,9 +134,8 @@ public class RegisterActivity extends BaseActivity {
             public void onSuccess(Result result) {
                 if (result == null) {
                     pd.dismiss();
-                    Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (result.isRetMsg()) {
+                    if (result.isRetMsg()) {//如果返回值正确
                         registerEMServer();//环信服务器上注册
                     } else {
                         if (result.getRetCode() == I.MSG_REGISTER_USERNAME_EXISTS) {//存在该用户
@@ -237,6 +236,7 @@ public class RegisterActivity extends BaseActivity {
                 MFGT.finish(this);
                 break;
             case R.id.register://点击注册
+                register();
                 break;
         }
     }
