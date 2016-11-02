@@ -13,6 +13,7 @@ public class NetDao {
 
     /**
      * 注册
+     *
      * @param mContext
      * @param username
      * @param usernick
@@ -32,11 +33,12 @@ public class NetDao {
 
     /**
      * 取消注册
+     *
      * @param mContext
      * @param username
      * @param listener
      */
-    public static void unregister(Context mContext, String username,OkHttpUtils.OnCompleteListener<Result> listener) {
+    public static void unregister(Context mContext, String username, OkHttpUtils.OnCompleteListener<Result> listener) {
         OkHttpUtils<Result> utils = new OkHttpUtils<>(mContext);
         utils.setRequestUrl(I.REQUEST_UNREGISTER)
                 .addParam(I.User.USER_NAME, username)
@@ -45,7 +47,26 @@ public class NetDao {
     }
 
     /**
+     * 登录请求
+     *
+     * @param context
+     * @param username
+     * @param password
+     * @param listener
+     */
+    public static void login(Context context, String username,
+                             String password, OkHttpUtils.OnCompleteListener<String> listener) {
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_LOGIN)
+                .addParam(I.User.USER_NAME, username)
+                .addParam(I.User.PASSWORD, MD5.getMessageDigest(password))
+                .targetClass(String.class)
+                .execute(listener);
+    }
+
+    /**
      * 修改昵称
+     *
      * @param mContext
      * @param userName
      * @param userNick
@@ -63,6 +84,7 @@ public class NetDao {
 
     /**
      * 同步用户信息
+     *
      * @param mContext
      * @param userName
      * @param listener
