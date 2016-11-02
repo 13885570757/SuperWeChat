@@ -47,14 +47,14 @@
             android:text="登录"
             android:background="@drawable/btn_style_green"
             android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:onClick="login_mainweixin"/>
+            android:textSize="18sp"/>
         <Button
             android:id="@+id/forget_passwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="23dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/login_login_btn"
             android:text="登录遇到问题?"
             android:textSize="16sp"
             android:textColor="#00f"
@@ -62,11 +62,11 @@
             android:layout_alignParentRight="true"
             />
 
-
     </RelativeLayout>
     <Button
         android:id="@+id/login_register"
         android:text="注册"
+        android:textSize="18sp"
         android:layout_marginBottom="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
