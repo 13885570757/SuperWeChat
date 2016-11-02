@@ -1,75 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#eee"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#eee"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
     <include layout="@layout/view_title_bar"/>
+
     <EditText
         android:id="@+id/username"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_top_layout"
-        android:textColor="#000"
-        android:textSize="15sp"
-        android:layout_marginTop="25dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:singleLine="true"
+        android:layout_marginTop="25dp"
         android:background="@drawable/login_editbox"
-        android:hint="QQ号/微信号/手机号"/>
+        android:hint="QQ号/微信号/手机号"
+        android:singleLine="true"
+        android:textColor="#000"
+        android:textSize="15sp"/>
+
     <EditText
         android:id="@+id/password"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_user_edit"
-        android:textColor="#000"
-        android:textSize="15sp"
-        android:layout_marginTop="25dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/login_editbox"
+        android:hint="密码"
         android:password="true"
         android:singleLine="true"
-        android:hint="密码"/>
+        android:textColor="#000"
+        android:textSize="15sp"/>
+
     <RelativeLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_below="@+id/login_passwd_edit"
+        android:layout_marginTop="20dp"
         >
+
         <Button
             android:id="@+id/login_login_btn"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="15dp"
-            android:text="登录"
             android:background="@drawable/btn_style_green"
+            android:text="登录"
             android:textColor="#ffffff"
             android:textSize="18sp"/>
+
         <Button
             android:id="@+id/forget_passwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/login_login_btn"
             android:layout_marginLeft="23dp"
             android:layout_marginTop="5dp"
-            android:layout_below="@+id/login_login_btn"
-            android:text="登录遇到问题?"
-            android:textSize="16sp"
-            android:textColor="#00f"
             android:background="#0000"
-            android:layout_alignParentRight="true"
+            android:text="登录遇到问题?"
+            android:textColor="#00f"
+            android:textSize="16sp"
             />
 
+        <Button
+            android:id="@+id/login_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/login_login_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="5dp"
+            android:background="#0000"
+            android:text="还没有账号？"
+            android:textColor="#00f"
+            android:textSize="16sp"/>
+
     </RelativeLayout>
-    <Button
-        android:id="@+id/login_register"
-        android:text="注册"
-        android:textSize="18sp"
-        android:layout_marginBottom="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+
 </LinearLayout>

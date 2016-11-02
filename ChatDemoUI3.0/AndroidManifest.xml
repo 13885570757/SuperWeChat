@@ -51,7 +51,7 @@
     <application
         android:name=".SuperWeChatApplication"
         android:allowBackup="true"
-        android:icon="@drawable/em_logo_uidemo"
+        android:icon="@drawable/icon_logo"
         android:theme="@style/Theme.AppCompat"
         android:label="@string/app_name">
         <!--我的主题-->

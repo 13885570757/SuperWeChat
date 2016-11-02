@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2016 Hyphenate Inc. All rights reserved.
- * <p>
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -44,7 +44,6 @@ import cn.ucai.superwechat.utils.MFGT;
 
 /**
  * Login screen
- *
  */
 public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
@@ -63,8 +62,6 @@ public class LoginActivity extends BaseActivity {
     Button forgetPasswd;
     @Bind(R.id.login_register)
     Button loginRegister;
- //   private EditText usernameEditText;
-  //  private EditText passwordEditText;
 
     private boolean progressShow;
     private boolean autoLogin = false;
@@ -72,27 +69,22 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
+        super.onCreate(savedInstanceState);
         // enter the main activity if already logged in
+        //判断当前是否为有账号状态
         if (SuperWeChatHelper.getInstance().isLoggedIn()) {
             autoLogin = true;
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
-
             return;
         }
         setContentView(R.layout.em_activity_login);
         ButterKnife.bind(this);
-        super.onCreate(savedInstanceState);
         setListener();
         initView();
     }
 
-      //  usernameEditText = (EditText) findViewById(R.id.username);
-      //  passwordEditText = (EditText) findViewById(R.id.password);
-
-        // if user changed, clear the password
-
-
+    // if user changed, clear the password
+    //如果用户名变更，清空密码
     private void setListener() {
         usernameEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -115,8 +107,11 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 设置标题显示状态
+     */
     private void initView() {
-        if (SuperWeChatHelper.getInstance().getCurrentUsernName()!=null){
+        if (SuperWeChatHelper.getInstance().getCurrentUsernName() != null) {
             usernameEditText.setText(SuperWeChatHelper.getInstance().getCurrentUsernName());
         }
         imgBack.setVisibility(View.VISIBLE);
@@ -221,16 +216,6 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-
-//    /**
-//     * register
-//     *
-//     * @param view
-//     */
-//    public void register(View view) {
-//        startActivityForResult(new Intent(this, RegisterActivity.class), 0);
-//    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -245,12 +230,13 @@ public class LoginActivity extends BaseActivity {
             case R.id.img_back://返回
                 MFGT.finish(this);
                 break;
-            case R.id.login_login_btn://登录
+            case R.id.login_login_btn:
                 login();
                 break;
             case R.id.forget_passwd:
+                MFGT.gotoRegisterActivity(this);
                 break;
-            case R.id.login_register://跳转到注册界面
+            case R.id.login_register:
                 MFGT.gotoRegisterActivity(this);
                 break;
         }
