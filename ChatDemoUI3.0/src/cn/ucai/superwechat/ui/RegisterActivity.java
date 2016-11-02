@@ -17,7 +17,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -52,8 +51,6 @@ public class RegisterActivity extends BaseActivity {
     EditText etPassword;
     @Bind(R.id.et_repassword)
     EditText etRepassword;
-    @Bind(R.id.register)
-    Button register;
 
     String username;
     String usernick;
@@ -69,10 +66,11 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.em_activity_register);
         ButterKnife.bind(this);
         mContext = this;
+        super.onCreate(savedInstanceState);
+
         initview();
     }
 
@@ -101,7 +99,7 @@ public class RegisterActivity extends BaseActivity {
 
         } else if (!username.matches("[a-zA-Z]\\w{5,15}")) {//账号格式
             Toast.makeText(RegisterActivity.this, "账号格式错误", Toast.LENGTH_SHORT).show();
-
+            return;
         } else if (TextUtils.isEmpty(password)) {//密码不能为空
             Toast.makeText(this, getResources().getString(R.string.Password_cannot_be_empty), Toast.LENGTH_SHORT).show();
             etPassword.requestFocus();
@@ -117,6 +115,7 @@ public class RegisterActivity extends BaseActivity {
 
 
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
+            pd = new ProgressDialog(this);
             pd.setMessage(getResources().getString(R.string.Is_the_registered));
             pd.show();
             registerAppServer();//超级微信服务器
@@ -129,6 +128,7 @@ public class RegisterActivity extends BaseActivity {
      * 在服务器上注册
      */
     private void registerAppServer() {
+        L.e("========优才服务器注册");
         NetDao.register(mContext, username, usernick, password, new OkHttpUtils.OnCompleteListener<Result>() {
             @Override
             public void onSuccess(Result result) {
@@ -137,6 +137,7 @@ public class RegisterActivity extends BaseActivity {
                 } else {
                     if (result.isRetMsg()) {//如果返回值正确
                         registerEMServer();//环信服务器上注册
+                        L.e("========环信服务器注册");
                     } else {
                         if (result.getRetCode() == I.MSG_REGISTER_USERNAME_EXISTS) {//存在该用户
                             CommonUtils.showLongToast(result.getRetCode());
@@ -163,6 +164,7 @@ public class RegisterActivity extends BaseActivity {
      * 取消注册
      */
     private void unregisterAppServer() {
+        L.e("========优才服务器注册失败");
         NetDao.unregister(mContext, username, new OkHttpUtils.OnCompleteListener<Result>() {
             @Override
             public void onSuccess(Result result) {
@@ -180,7 +182,7 @@ public class RegisterActivity extends BaseActivity {
      * 环信服务器上注册
      */
     private void registerEMServer() {
-
+        L.e("========环信服务器注册具体方法");
         new Thread(new Runnable() {
             public void run() {
                 try {
