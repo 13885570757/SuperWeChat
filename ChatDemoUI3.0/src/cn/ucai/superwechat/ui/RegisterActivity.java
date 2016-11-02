@@ -37,6 +37,7 @@ import cn.ucai.superwechat.net.NetDao;
 import cn.ucai.superwechat.net.OkHttpUtils;
 import cn.ucai.superwechat.utils.CommonUtils;
 import cn.ucai.superwechat.utils.L;
+import cn.ucai.superwechat.utils.MD5;
 import cn.ucai.superwechat.utils.MFGT;
 
 /**
@@ -187,7 +188,7 @@ public class RegisterActivity extends BaseActivity {
             public void run() {
                 try {
                     // call method in SDK
-                    EMClient.getInstance().createAccount(username, password);
+                    EMClient.getInstance().createAccount(username, MD5.getMessageDigest(password));
                     runOnUiThread(new Runnable() {
                         public void run() {
                             if (!RegisterActivity.this.isFinishing())
