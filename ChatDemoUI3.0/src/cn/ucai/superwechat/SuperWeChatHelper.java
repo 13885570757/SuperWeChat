@@ -75,7 +75,7 @@ public class SuperWeChatHelper {
         void onSyncComplete(boolean success);
     }
 
-    protected static final String TAG = "DemoHelper";
+    protected static final String TAG = "SuperWeChatHelper";
     
 	private EaseUI easeUI;
 	
@@ -95,6 +95,7 @@ public class SuperWeChatHelper {
 	private SuperWeChatModel demoModel = null;
 
     private User currentUser = null;
+    private  Map<String ,User> appContatList;
 	
 	/**
      * sync groups status listener
@@ -849,7 +850,7 @@ public class SuperWeChatHelper {
 	/**
 	 * update contact list
 	 * 
-	 * @param contactList
+	 * @param aContactList
 	 */
 	public void setContactList(Map<String, EaseUser> aContactList) {
 		if(aContactList == null){
@@ -1251,6 +1252,50 @@ public class SuperWeChatHelper {
             currentUser = new User(username);
         }
             return currentUser;
+
+    }
+    //本地服务器获取用户信息合集
+    public void setAppContatList(Map<String ,User>aContatList){
+        if (aContatList==null){
+            if (appContatList!=null){
+                appContatList.clear();
+
+            }
+            return;
+        }
+        appContatList = aContatList;
     }
 
+    /**
+     * 保存登录到本地服务器
+     * @param user
+     */
+    public void saveAppContact(User user){
+        appContatList.put(user.getMUserName(),user);
+        demoModel.saveAppContact(user);
+    }
+
+    /**
+     * 从本地服务器获取登录状态
+     * @return
+     */
+    public Map<String ,User>getAppContatList(){
+        if (isLoggedIn()&&appContatList==null){
+            appContatList = demoModel.getAppContactList();
+        }
+        if (appContatList==null){
+            return new Hashtable<String,User>();
+        }
+        return appContatList;
+    }
+
+
+    public void updateAppContactList(List<User>contactInfoList){
+        for(User user:contactInfoList){
+            appContatList.put(user.getMUserName(),user);
+        }
+        ArrayList<User> mList = new ArrayList<User>();
+        mList.addAll(appContatList.values());
+        demoModel.saveAppContactList(mList);
+    }
 }
