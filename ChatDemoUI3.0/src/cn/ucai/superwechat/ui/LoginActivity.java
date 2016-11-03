@@ -280,6 +280,10 @@ public class LoginActivity extends BaseActivity {
         if (autoLogin) {
             return;
         }
+        //返回刚注册的账号显示在登录账号框中
+        if (SuperWeChatHelper.getInstance().getCurrentUsernName()!=null){
+            usernameEditText.setText(SuperWeChatHelper.getInstance().getCurrentUsernName());
+        }
     }
 
     @OnClick({R.id.img_back, R.id.login_login_btn, R.id.forget_passwd, R.id.login_register})
