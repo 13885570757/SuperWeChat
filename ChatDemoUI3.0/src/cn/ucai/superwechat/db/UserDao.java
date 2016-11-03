@@ -121,4 +121,11 @@ public class UserDao {
 	public boolean updateUser(User user) {
 		return SuperWeChatDBManager.getInstance().updateUser(user);
 	}
+
+	/**
+	 *
+	 * @param user
+     */
+	public void saveAppContact(User user) {
+	}
 }
