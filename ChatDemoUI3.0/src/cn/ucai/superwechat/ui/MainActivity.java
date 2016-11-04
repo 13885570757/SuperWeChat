@@ -25,13 +25,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.easemob.redpacketui.RedPacketConstant;
@@ -44,21 +40,20 @@ import com.hyphenate.chat.EMCmdMessageBody;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMConversation.EMConversationType;
 import com.hyphenate.chat.EMMessage;
-
-import cn.ucai.superwechat.Constant;
-import cn.ucai.superwechat.SuperWeChatHelper;
-import cn.ucai.superwechat.R;
-import cn.ucai.superwechat.db.InviteMessgeDao;
-import cn.ucai.superwechat.db.UserDao;
-import cn.ucai.superwechat.runtimepermissions.PermissionsManager;
-import cn.ucai.superwechat.runtimepermissions.PermissionsResultAction;
-
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.util.EMLog;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 
 import java.util.List;
+
+import cn.ucai.superwechat.Constant;
+import cn.ucai.superwechat.R;
+import cn.ucai.superwechat.SuperWeChatHelper;
+import cn.ucai.superwechat.db.InviteMessgeDao;
+import cn.ucai.superwechat.db.UserDao;
+import cn.ucai.superwechat.runtimepermissions.PermissionsManager;
+import cn.ucai.superwechat.runtimepermissions.PermissionsResultAction;
 
 @SuppressLint("NewApi")
 public class MainActivity extends BaseActivity {
@@ -77,7 +72,7 @@ public class MainActivity extends BaseActivity {
     // user logged into another device
     public boolean isConflict = false;
     // user account was removed
-//	private boolean isCurrentAccountRemoved = false;
+	private boolean isCurrentAccountRemoved = false;
 
 
     /**
@@ -239,12 +234,12 @@ public class MainActivity extends BaseActivity {
             public void run() {
                 // refresh unread count
                 updateUnreadLabel();
-                if (currentTabIndex == 0) {
-                    // refresh conversation list
-                    if (conversationListFragment != null) {
-                        conversationListFragment.refresh();
-                    }
-                }
+//                if (currentTabIndex == 0) {
+//                    // refresh conversation list
+//                    if (conversationListFragment != null) {
+//                        conversationListFragment.refresh();
+//                    }
+//                }
             }
         });
     }
@@ -266,32 +261,26 @@ public class MainActivity extends BaseActivity {
             public void onReceive(Context context, Intent intent) {
                 updateUnreadLabel();
                 updateUnreadAddressLable();
-                if (currentTabIndex == 0) {
-                    // refresh conversation list
-                    if (conversationListFragment != null) {
-                        conversationListFragment.refresh();
-                    }
-                } else if (currentTabIndex == 1) {
-                    if (contactListFragment != null) {
-                        contactListFragment.refresh();
-                    }
-                }
+//                if (currentTabIndex == 0) {
+//                    // refresh conversation list
+//                    if (conversationListFragment != null) {
+//                        conversationListFragment.refresh();
+//                    }
+//                } else if (currentTabIndex == 1) {
+//                    if (contactListFragment != null) {
+//                        contactListFragment.refresh();
+//                    }
+//                }
                 String action = intent.getAction();
                 if (action.equals(Constant.ACTION_GROUP_CHANAGED)) {
                     if (EaseCommonUtils.getTopActivity(MainActivity.this).equals(GroupsActivity.class.getName())) {
                         GroupsActivity.instance.onResume();
                     }
                 }
-                //red packet code : 处理红包回执透传消息
-                if (action.equals(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION)) {
-                    if (conversationListFragment != null) {
-                        conversationListFragment.refresh();
-                    }
-                }
-                //end of red packet code
+
             }
         };
-        broadcastManager.registerReceiver(broadcastReceiver, intentFilter);
+        //  broadcastManager.registerReceiver(broadcastReceiver, intentFilter);
     }
 
     public class MyContactListener implements EMContactListener {
@@ -328,7 +317,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void unregisterBroadcastReceiver() {
-        broadcastManager.unregisterReceiver(broadcastReceiver);
+        //   broadcastManager.unregisterReceiver(broadcastReceiver);
     }
 
     @Override
@@ -353,12 +342,12 @@ public class MainActivity extends BaseActivity {
      */
     public void updateUnreadLabel() {
         int count = getUnreadMsgCountTotal();
-        if (count > 0) {
-            unreadLabel.setText(String.valueOf(count));
-            unreadLabel.setVisibility(View.VISIBLE);
-        } else {
-            unreadLabel.setVisibility(View.INVISIBLE);
-        }
+//        if (count > 0) {
+//            unreadLabel.setText(String.valueOf(count));
+//            unreadLabel.setVisibility(View.VISIBLE);
+//        } else {
+//            unreadLabel.setVisibility(View.INVISIBLE);
+//        }
     }
 
     /**
@@ -368,11 +357,11 @@ public class MainActivity extends BaseActivity {
         runOnUiThread(new Runnable() {
             public void run() {
                 int count = getUnreadAddressCountTotal();
-                if (count > 0) {
-                    unreadAddressLable.setVisibility(View.VISIBLE);
-                } else {
-                    unreadAddressLable.setVisibility(View.INVISIBLE);
-                }
+//                if (count > 0) {
+//                    unreadAddressLable.setVisibility(View.VISIBLE);
+//                } else {
+//                    unreadAddressLable.setVisibility(View.INVISIBLE);
+//                }
             }
         });
 
@@ -398,11 +387,11 @@ public class MainActivity extends BaseActivity {
         int unreadMsgCountTotal = 0;
         int chatroomUnreadMsgCount = 0;
         unreadMsgCountTotal = EMClient.getInstance().chatManager().getUnreadMsgsCount();
-        for (EMConversation conversation : EMClient.getInstance().chatManager().getAllConversations().values()) {
-            if (conversation.getType() == EMConversationType.ChatRoom)
-                chatroomUnreadMsgCount = chatroomUnreadMsgCount + conversation.getUnreadMsgCount();
+        for(EMConversation conversation:EMClient.getInstance().chatManager().getAllConversations().values()){
+            if(conversation.getType() == EMConversationType.ChatRoom)
+                chatroomUnreadMsgCount=chatroomUnreadMsgCount+conversation.getUnreadMsgCount();
         }
-        return unreadMsgCountTotal - chatroomUnreadMsgCount;
+        return unreadMsgCountTotal-chatroomUnreadMsgCount;
     }
 
     private InviteMessgeDao inviteMessgeDao;
@@ -463,7 +452,7 @@ public class MainActivity extends BaseActivity {
      */
     private void showConflictDialog() {
         isConflictDialogShow = true;
-        SuperWeChatHelper.getInstance().logout(false, null);
+        SuperWeChatHelper.getInstance().logout(false,null);
         String st = getResources().getString(R.string.Logoff_notification);
         if (!MainActivity.this.isFinishing()) {
             // clear up global variables
@@ -500,7 +489,7 @@ public class MainActivity extends BaseActivity {
      */
     private void showAccountRemovedDialog() {
         isAccountRemovedDialogShow = true;
-        SuperWeChatHelper.getInstance().logout(false, null);
+        SuperWeChatHelper.getInstance().logout(false,null);
         String st5 = getResources().getString(R.string.Remove_the_notification);
         if (!MainActivity.this.isFinishing()) {
             // clear up global variables
@@ -548,7 +537,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onReceive(Context context, Intent intent) {
-                SuperWeChatHelper.getInstance().logout(false, new EMCallBack() {
+                SuperWeChatHelper.getInstance().logout(false,new EMCallBack() {
 
                     @Override
                     public void onSuccess() {
@@ -562,12 +551,10 @@ public class MainActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onProgress(int progress, String status) {
-                    }
+                    public void onProgress(int progress, String status) {}
 
                     @Override
-                    public void onError(int code, String message) {
-                    }
+                    public void onError(int code, String message) {}
                 });
             }
         };
@@ -581,3 +568,4 @@ public class MainActivity extends BaseActivity {
         PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
     }
 }
+
