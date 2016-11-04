@@ -83,7 +83,8 @@ public class ProfileFragment extends Fragment {
     @OnClick({R.id.layout_profile_view, R.id.tv_profile_money, R.id.tv_profile_setting})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.layout_profile_view:
+            case R.id.layout_profile_view://跳转到个人信息
+                MFGT.gotoUserProfileActivity(getActivity());
                 break;
             case R.id.tv_profile_money: //跳转到钱包
                 RedPacketUtil.startChangeActivity(getActivity());

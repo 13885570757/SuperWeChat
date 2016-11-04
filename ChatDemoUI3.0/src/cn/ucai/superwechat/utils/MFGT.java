@@ -7,6 +7,7 @@ import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.ui.LoginActivity;
 import cn.ucai.superwechat.ui.RegisterActivity;
 import cn.ucai.superwechat.ui.SettingsActivity;
+import cn.ucai.superwechat.ui.UserProfileActivity;
 
 /**
  * Created by Administrator on 2016/11/1.
@@ -55,6 +56,14 @@ public class MFGT {
      */
     public static void gotoSettingsActivity(Activity context){
         startActivity(context,SettingsActivity.class);
+    }
+
+    /**
+     * 跳转到个人信息
+     * @param context
+     */
+    public static void gotoUserProfileActivity(Activity context){
+        startActivity(context,UserProfileActivity.class);
     }
 
 }
