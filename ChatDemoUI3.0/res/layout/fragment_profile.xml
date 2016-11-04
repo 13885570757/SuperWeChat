@@ -71,6 +71,7 @@
                 android:layout_height="0.3dp"
                 android:background="@color/black3"/>
             <TextView
+                android:layout_marginTop="20dp"
                 android:id="@+id/tv_profile_photo"
                 style="@style/list_txt_Style_without_right"
                 android:drawableLeft="@drawable/icon_me_photo"
