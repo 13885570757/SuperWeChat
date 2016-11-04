@@ -14,6 +14,7 @@
         android:id="@+id/layout_viewpage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="48dp"
         android:layout_below="@+id/layout_title">
     </cn.ucai.superwechat.widget.MFViewPager>
 
@@ -30,7 +31,9 @@
             android:background="#d6dcdc"/>
 
         <cn.ucai.superwechat.widget.DMTabHost
+            android:id="@+id/layout_tabhost"
             android:layout_width="match_parent"
+            android:paddingBottom="1dp"
             android:layout_height="47dp">
 
             <cn.ucai.superwechat.widget.DMTabButton
@@ -45,8 +48,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:drawableTop="@drawable/tab_find"
-                app:tabtext="@string/discover">
+                app:drawableTop="@drawable/tab_contact_list"
+                app:tabtext="@string/contacts">
 
             </cn.ucai.superwechat.widget.DMTabButton>
 
@@ -54,8 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:drawableTop="@drawable/tab_profile"
-                app:tabtext="@string/me">
+                app:drawableTop="@drawable/tab_find"
+                app:tabtext="@string/discover">
             </cn.ucai.superwechat.widget.DMTabButton>
 
             <cn.ucai.superwechat.widget.DMTabButton

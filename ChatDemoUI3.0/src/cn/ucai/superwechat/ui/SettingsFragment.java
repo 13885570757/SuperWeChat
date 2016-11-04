@@ -32,12 +32,12 @@ import com.easemob.redpacketui.utils.RedPacketUtil;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
-import cn.ucai.superwechat.Constant;
-import cn.ucai.superwechat.SuperWeChatHelper;
-import cn.ucai.superwechat.SuperWeChatModel;
-import cn.ucai.superwechat.R;
 import com.hyphenate.easeui.widget.EaseSwitchButton;
 import com.hyphenate.util.EMLog;
+
+import cn.ucai.superwechat.R;
+import cn.ucai.superwechat.SuperWeChatHelper;
+import cn.ucai.superwechat.SuperWeChatModel;
 
 /**
  * settings screen
@@ -412,10 +412,11 @@ public class SettingsFragment extends Fragment implements OnClickListener {
     @Override
     public void onSaveInstanceState(Bundle outState) {
     	super.onSaveInstanceState(outState);
-        if(((MainActivity)getActivity()).isConflict){
-        	outState.putBoolean("isConflict", true);
-        }else if(((MainActivity)getActivity()).getCurrentAccountRemoved()){
-        	outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
-        }
+        if(((MainActivity)getActivity()).isConflict) {
+			outState.putBoolean("isConflict", true);
+		}
+//        }else if(((MainActivity)getActivity()).getCurrentAccountRemoved()){
+//        	outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
+//        }
     }
 }
