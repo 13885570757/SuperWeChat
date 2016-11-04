@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.hyphenate.EMValueCallBack;
 import com.hyphenate.easeui.domain.EaseUser;
+import com.hyphenate.easeui.domain.User;
 import com.hyphenate.easeui.utils.EaseUserUtils;
 
 import java.io.ByteArrayOutputStream;
@@ -51,6 +52,8 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
     private ProgressDialog dialog;
     private RelativeLayout rlNickName;
 
+    User user = null;
+
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -59,6 +62,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
         ButterKnife.bind(this);
         initView();
         initListener();
+        user = EaseUserUtils.getCurrentAppUserInfo();
     }
 
     private void initView() {
@@ -267,6 +271,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
                 break;
             case R.id.layout_userinfo_nick:
                 final EditText editText = new EditText(this);
+                editText.setText(user.getMUserNick());
                 new Builder(this).setTitle(R.string.setting_nickname).
                         setIcon(android.R.drawable.ic_dialog_info).setView(editText)
                 .setPositiveButton(R.string.dl_ok, new DialogInterface.OnClickListener() {
@@ -274,7 +279,10 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String nickString  = editText.toString();
                         if (TextUtils.isEmpty(nickString)){
-                            Toast.makeText(UserProfileActivity.this, "昵称不能为空", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserProfileActivity.this, getString(R.string.toast_nick_not_isnull), Toast.LENGTH_SHORT).show();
+                        }
+                        if (nickString.equals(user.getMUserNick())){
+                            CommonUtils.showLongToast(getString(R.string.toast_nick_not_modify));
                         }
                         updateRemoteNick(nickString);
                     }

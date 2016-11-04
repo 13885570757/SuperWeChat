@@ -105,4 +105,10 @@ public class ProfileFragment extends Fragment {
             outState.getBoolean(Constant.ACCOUNT_REMOVED, true);
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUserInfo(); // 设置用户信息
+    }
 }
