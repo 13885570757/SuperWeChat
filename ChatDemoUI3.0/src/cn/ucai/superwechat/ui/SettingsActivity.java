@@ -16,12 +16,9 @@ package cn.ucai.superwechat.ui;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -45,7 +42,7 @@ import cn.ucai.superwechat.SuperWeChatModel;
  * 
  */
 @SuppressWarnings({"FieldCanBeLocal"})
-public class SettingsFragment extends Fragment implements OnClickListener {
+public class SettingsActivity extends BaseActivity implements OnClickListener {
 
 	/**
 	 * new message notification
@@ -107,49 +104,46 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 
     private SuperWeChatModel settingsModel;
     private EMOptions chatOptions;
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.em_fragment_conversation_settings, container, false);
-	}
 
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.em_fragment_conversation_settings);
+		
 		if(savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
             return;
-		rl_switch_notification = (RelativeLayout) getView().findViewById(R.id.rl_switch_notification);
-		rl_switch_sound = (RelativeLayout) getView().findViewById(R.id.rl_switch_sound);
-		rl_switch_vibrate = (RelativeLayout) getView().findViewById(R.id.rl_switch_vibrate);
-		rl_switch_speaker = (RelativeLayout) getView().findViewById(R.id.rl_switch_speaker);
-		rl_switch_chatroom_leave = (RelativeLayout) getView().findViewById(R.id.rl_switch_chatroom_owner_leave);
-		rl_switch_delete_msg_when_exit_group = (RelativeLayout) getView().findViewById(R.id.rl_switch_delete_msg_when_exit_group);
-		rl_switch_auto_accept_group_invitation = (RelativeLayout) getView().findViewById(R.id.rl_switch_auto_accept_group_invitation);
-		rl_switch_adaptive_video_encode = (RelativeLayout) getView().findViewById(R.id.rl_switch_adaptive_video_encode);
-		rl_custom_server = (RelativeLayout) getView().findViewById(R.id.rl_custom_server);
+		rl_switch_notification = (RelativeLayout) findViewById(R.id.rl_switch_notification);
+		rl_switch_sound = (RelativeLayout) findViewById(R.id.rl_switch_sound);
+		rl_switch_vibrate = (RelativeLayout) findViewById(R.id.rl_switch_vibrate);
+		rl_switch_speaker = (RelativeLayout) findViewById(R.id.rl_switch_speaker);
+		rl_switch_chatroom_leave = (RelativeLayout) findViewById(R.id.rl_switch_chatroom_owner_leave);
+		rl_switch_delete_msg_when_exit_group = (RelativeLayout) findViewById(R.id.rl_switch_delete_msg_when_exit_group);
+		rl_switch_auto_accept_group_invitation = (RelativeLayout) findViewById(R.id.rl_switch_auto_accept_group_invitation);
+		rl_switch_adaptive_video_encode = (RelativeLayout) findViewById(R.id.rl_switch_adaptive_video_encode);
+		rl_custom_server = (RelativeLayout) findViewById(R.id.rl_custom_server);
 
-		notifiSwitch = (EaseSwitchButton) getView().findViewById(R.id.switch_notification);
-		soundSwitch = (EaseSwitchButton) getView().findViewById(R.id.switch_sound);
-		vibrateSwitch = (EaseSwitchButton) getView().findViewById(R.id.switch_vibrate);
-		speakerSwitch = (EaseSwitchButton) getView().findViewById(R.id.switch_speaker);
-		ownerLeaveSwitch = (EaseSwitchButton) getView().findViewById(R.id.switch_owner_leave);
-		switch_delete_msg_when_exit_group = (EaseSwitchButton) getView().findViewById(R.id.switch_delete_msg_when_exit_group);
-		switch_auto_accept_group_invitation = (EaseSwitchButton) getView().findViewById(R.id.switch_auto_accept_group_invitation);
-		switch_adaptive_video_encode = (EaseSwitchButton) getView().findViewById(R.id.switch_adaptive_video_encode);
-		LinearLayout llChange = (LinearLayout) getView().findViewById(R.id.ll_change);
-		logoutBtn = (Button) getView().findViewById(R.id.btn_logout);
+		notifiSwitch = (EaseSwitchButton) findViewById(R.id.switch_notification);
+		soundSwitch = (EaseSwitchButton) findViewById(R.id.switch_sound);
+		vibrateSwitch = (EaseSwitchButton) findViewById(R.id.switch_vibrate);
+		speakerSwitch = (EaseSwitchButton) findViewById(R.id.switch_speaker);
+		ownerLeaveSwitch = (EaseSwitchButton) findViewById(R.id.switch_owner_leave);
+		switch_delete_msg_when_exit_group = (EaseSwitchButton) findViewById(R.id.switch_delete_msg_when_exit_group);
+		switch_auto_accept_group_invitation = (EaseSwitchButton) findViewById(R.id.switch_auto_accept_group_invitation);
+		switch_adaptive_video_encode = (EaseSwitchButton) findViewById(R.id.switch_adaptive_video_encode);
+		LinearLayout llChange = (LinearLayout) findViewById(R.id.ll_change);
+		logoutBtn = (Button) findViewById(R.id.btn_logout);
 		if(!TextUtils.isEmpty(EMClient.getInstance().getCurrentUser())){
 			logoutBtn.setText(getString(R.string.button_logout) + "(" + EMClient.getInstance().getCurrentUser() + ")");
 		}
-		customServerSwitch = (EaseSwitchButton) getView().findViewById(R.id.switch_custom_server);
+		customServerSwitch = (EaseSwitchButton) findViewById(R.id.switch_custom_server);
 
-		textview1 = (TextView) getView().findViewById(R.id.textview1);
-		textview2 = (TextView) getView().findViewById(R.id.textview2);
+		textview1 = (TextView) findViewById(R.id.textview1);
+		textview2 = (TextView) findViewById(R.id.textview2);
 		
-		blacklistContainer = (LinearLayout) getView().findViewById(R.id.ll_black_list);
-		userProfileContainer = (LinearLayout) getView().findViewById(R.id.ll_user_profile);
-		llDiagnose=(LinearLayout) getView().findViewById(R.id.ll_diagnose);
-		pushNick=(LinearLayout) getView().findViewById(R.id.ll_set_push_nick);
+		blacklistContainer = (LinearLayout) findViewById(R.id.ll_black_list);
+		userProfileContainer = (LinearLayout) findViewById(R.id.ll_user_profile);
+		llDiagnose=(LinearLayout) findViewById(R.id.ll_diagnose);
+		pushNick=(LinearLayout) findViewById(R.id.ll_set_push_nick);
 		
 		settingsModel = SuperWeChatHelper.getInstance().getModel();
 		chatOptions = EMClient.getInstance().getOptions();
@@ -240,7 +234,7 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 		switch (v.getId()) {
 			//red packet code : 进入零钱页面
 			case R.id.ll_change:
-				RedPacketUtil.startChangeActivity(getActivity());
+				RedPacketUtil.startChangeActivity(this);
 				break;
 			//end of red packet code
 			case R.id.rl_switch_notification:
@@ -337,16 +331,16 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 				logout();
 				break;
 			case R.id.ll_black_list:
-				startActivity(new Intent(getActivity(), BlacklistActivity.class));
+				startActivity(new Intent(this, BlacklistActivity.class));
 				break;
 			case R.id.ll_diagnose:
-				startActivity(new Intent(getActivity(), DiagnoseActivity.class));
+				startActivity(new Intent(this, DiagnoseActivity.class));
 				break;
 			case R.id.ll_set_push_nick:
-				startActivity(new Intent(getActivity(), OfflinePushNickActivity.class));
+				startActivity(new Intent(this, OfflinePushNickActivity.class));
 				break;
 			case R.id.ll_user_profile:
-				startActivity(new Intent(getActivity(), UserProfileActivity.class).putExtra("setting", true)
+				startActivity(new Intent(this, UserProfileActivity.class).putExtra("setting", true)
 						.putExtra("username", EMClient.getInstance().getCurrentUser()));
 				break;
 			case R.id.switch_custom_server:
@@ -359,7 +353,7 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 				}
 				break;
 			case R.id.rl_custom_server:
-				startActivity(new Intent(getActivity(), SetServersActivity.class));
+				startActivity(new Intent(this, SetServersActivity.class));
 				break;
 			default:
 				break;
@@ -368,7 +362,7 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 	}
 
 	void logout() {
-		final ProgressDialog pd = new ProgressDialog(getActivity());
+		final ProgressDialog pd = new ProgressDialog(this);
 		String st = getResources().getString(R.string.Are_logged_out);
 		pd.setMessage(st);
 		pd.setCanceledOnTouchOutside(false);
@@ -377,12 +371,12 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 			
 			@Override
 			public void onSuccess() {
-				getActivity().runOnUiThread(new Runnable() {
+				runOnUiThread(new Runnable() {
 					public void run() {
 						pd.dismiss();
 						// show login screen
-						((MainActivity) getActivity()).finish();
-						startActivity(new Intent(getActivity(), LoginActivity.class));
+						finish();
+						startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
 						
 					}
 				});
@@ -395,28 +389,16 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 			
 			@Override
 			public void onError(int code, String message) {
-				getActivity().runOnUiThread(new Runnable() {
+				runOnUiThread(new Runnable() {
 					
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
 						pd.dismiss();
-						Toast.makeText(getActivity(), "unbind devicetokens failed", Toast.LENGTH_SHORT).show();
+						Toast.makeText(SettingsActivity.this, "unbind devicetokens failed", Toast.LENGTH_SHORT).show();
 					}
 				});
 			}
 		});
 	}
-
-	
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-    	super.onSaveInstanceState(outState);
-        if(((MainActivity)getActivity()).isConflict) {
-			outState.putBoolean("isConflict", true);
-		}
-//        }else if(((MainActivity)getActivity()).getCurrentAccountRemoved()){
-//        	outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
-//        }
-    }
 }
