@@ -2,6 +2,8 @@ package cn.ucai.superwechat.net;
 
 import android.content.Context;
 
+import java.io.File;
+
 import cn.ucai.superwechat.I;
 import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.utils.MD5;
@@ -98,4 +100,15 @@ public class NetDao {
 
     }
 
+    /**
+     * 修改头像
+     * @param
+     */
+    public static void updateAvatar(Context mContext, String userName, File file, OkHttpUtils.OnCompleteListener<String>listener) {
+        OkHttpUtils<String> uitls = new OkHttpUtils<>(mContext);
+        uitls.setRequestUrl(I.REQUEST_UPDATE_AVATAR)
+                .addParam(I.User.USER_NAME,userName)
+                .targetClass(String.class)
+                .execute(listener);
+    }
 }

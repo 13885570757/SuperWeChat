@@ -23,19 +23,26 @@ import com.bumptech.glide.Glide;
 import com.hyphenate.EMValueCallBack;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.domain.User;
+import com.hyphenate.easeui.utils.EaseImageUtils;
 import com.hyphenate.easeui.utils.EaseUserUtils;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.ucai.superwechat.I;
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.SuperWeChatHelper;
 import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.net.NetDao;
 import cn.ucai.superwechat.net.OkHttpUtils;
 import cn.ucai.superwechat.utils.CommonUtils;
+import cn.ucai.superwechat.utils.L;
 import cn.ucai.superwechat.utils.MFGT;
 import cn.ucai.superwechat.utils.ResultUtils;
 
@@ -231,13 +238,74 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
                 break;
             case REQUESTCODE_CUTTING:
                 if (data != null) {
-                    setPicToView(data);
+                    //setPicToView(data);
+                    updateAppUserAvatar(data);
                 }
                 break;
             default:
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /**
+     * 修改本地头像
+     * @param picData
+     */
+    private void updateAppUserAvatar( final  Intent picData) {
+        dialog  =  ProgressDialog.show(this,getString(R.string.dl_update_photo),getString(R.string.dl_waiting));
+        dialog.show();
+        File file = saveBitmapFile(picData);
+
+        //网络请求
+        NetDao.updateAvatar(this,user.getMUserName(),file, new OkHttpUtils.OnCompleteListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+        if (s!=null){
+            Result result = ResultUtils.getResultFromJson(s,User.class);
+            L.i("=========修改头像的结果"+result);
+            if (result.isRetMsg()&&result!=null){
+                setPicToView(picData);
+
+            }else {
+                dialog.dismiss();
+                CommonUtils.showLongToast(result!=null?result.getRetCode():-1);
+               // CommonUtils.showShortToast(result!=null?R.string.toast_updatephoto_fail);
+            }
+
+        }else {
+            dialog.dismiss();
+            CommonUtils.showShortToast(R.string.toast_updatephoto_fail);
+        }
+            }
+
+            @Override
+            public void onError(String error) {
+        dialog.dismiss();
+                CommonUtils.showShortToast(R.string.toast_updatephoto_fail);
+            }
+        });
+
+    }
+
+    private File saveBitmapFile(Intent picdata) {
+        Bundle extraxs = picdata.getExtras();
+        if (extraxs!=null){
+            Bitmap bitmap = extraxs.getParcelable("data");
+            String imagePath = EaseImageUtils.getImagePath(user.getMUserName()+ I.AVATAR_SUFFIX_JPG);
+            File file = new File(imagePath);//图片保存路径
+            L.i("===========头像保存路径"+file.getAbsolutePath());
+            try {
+                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+                bitmap.compress(Bitmap.CompressFormat.PNG,100,bos);
+                bos.flush();
+                bos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return file;
+        }
+        return null;
     }
 
     /**
@@ -314,8 +382,8 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
             case R.id.img_back:
                 MFGT.finish(this);
                 break;
-            case R.id.layout_user_avatar:
-               // uploadUserAvatar();
+            case R.id.layout_user_avatar://修改头像
+                uploadHeadPhoto();
                 break;
             case R.id.layout_userinfo_nick:
                 final EditText editText = new EditText(this);
