@@ -32,8 +32,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.SuperWeChatHelper;
+import cn.ucai.superwechat.bean.Result;
+import cn.ucai.superwechat.net.NetDao;
+import cn.ucai.superwechat.net.OkHttpUtils;
 import cn.ucai.superwechat.utils.CommonUtils;
 import cn.ucai.superwechat.utils.MFGT;
+import cn.ucai.superwechat.utils.ResultUtils;
 
 public class UserProfileActivity extends BaseActivity implements OnClickListener {
 
@@ -158,6 +162,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
                         }
                     });
                 } else {
+                    updateAppNick(nickName);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -170,6 +175,49 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
                 }
             }
         }).start();
+    }
+
+    /**
+     * 更改本地服务器昵称
+     * @param nickName
+     */
+    private void updateAppNick(String nickName) {
+        NetDao.updateUserNick(this, user.getMUserName(), nickName, new OkHttpUtils.OnCompleteListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+                if (s!=null){
+                    Result result = ResultUtils.getResultFromJson(s,User.class);
+                    if (result!=null&&result.isRetMsg()){
+                        User u = (User) result.getRetData();
+                        updateLocatUser(u);
+                    }
+                    else {
+                        Toast.makeText(UserProfileActivity.this,
+                                getString(R.string.toast_updatenick_fail),
+                                Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                }else {
+                    Toast.makeText(UserProfileActivity.this, getString(R.string.toast_updatenick_fail), Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+    }
+
+    /**
+     * 更新本地
+     * @param u
+     */
+    private void updateLocatUser(User u) {
+        user = u;
+        SuperWeChatHelper.getInstance().saveAppContact(u);
+        EaseUserUtils.setCurrentAppUserNick(tvUserinfoNick);
     }
 
     @Override
