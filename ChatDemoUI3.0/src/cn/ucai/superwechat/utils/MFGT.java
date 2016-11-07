@@ -3,6 +3,8 @@ package cn.ucai.superwechat.utils;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.hyphenate.easeui.domain.User;
+
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.ui.AddContactActivity;
 import cn.ucai.superwechat.ui.LoginActivity;
@@ -73,5 +75,14 @@ public class MFGT {
      */
     public static void gotoAddFirent(Activity context) {
         startActivity(context, AddContactActivity.class);
+    }
+
+    /**
+     * 跳转到好友详情
+     * @param addContactActivity
+     * @param user
+     */
+    public static void gotoFriendProfile(AddContactActivity addContactActivity, User user) {
+
     }
 }
