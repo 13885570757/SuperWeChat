@@ -102,16 +102,34 @@ public class NetDao {
 
     /**
      * 修改头像
+     *
      * @param
      */
-    public static void updateAvatar(Context mContext, String userName, File file, OkHttpUtils.OnCompleteListener<String>listener) {
+    public static void updateAvatar(Context mContext, String userName, File file, OkHttpUtils.OnCompleteListener<String> listener) {
         OkHttpUtils<String> utils = new OkHttpUtils<>(mContext);
         utils.setRequestUrl(I.REQUEST_UPDATE_AVATAR)
-                .addParam(I.NAME_OR_HXID,userName)
-                .addParam(I.AVATAR_TYPE,I.AVATAR_TYPE_USER_PATH)
+                .addParam(I.NAME_OR_HXID, userName)
+                .addParam(I.AVATAR_TYPE, I.AVATAR_TYPE_USER_PATH)
                 .addFile2(file)
                 .targetClass(String.class)
                 .post()
                 .execute(listener);
     }
+
+    /**
+     * 搜索联系人
+     *
+     * @param context
+     * @param username
+     * @param listener
+     */
+    public static void searchUser(Context context, String username, OkHttpUtils.
+            OnCompleteListener<String> listener) {
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_FIND_USER)
+                .addParam(I.User.USER_NAME, username)
+                .targetClass(String.class)
+                .execute(listener);
+    }
+
 }
