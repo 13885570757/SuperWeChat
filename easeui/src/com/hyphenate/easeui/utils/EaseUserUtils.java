@@ -50,6 +50,14 @@ public class EaseUserUtils {
         return null;
     }
 
+    public static User getCurrentAppUserInfo() {
+        String username = EMClient.getInstance().getCurrentUser();
+        if(userProvider!=null){
+            return  userProvider.getAppUser(username);
+        }
+        return null;
+    }
+
     /**
      * set user avatar
      *
@@ -125,43 +133,54 @@ public class EaseUserUtils {
      * 从本地服务器获取当前用户信息(头像)
      *
      * @param activity
-     * @param ivProfileAvatar
+     * @param imageView
      */
-    public static void setCurrentAppUserAvatar(FragmentActivity activity, ImageView ivProfileAvatar) {
+    public static void setCurrentAppUserAvatar(FragmentActivity activity, ImageView imageView) {
         String username = EMClient.getInstance().getCurrentUser();
-        setAppUserAvatar(activity, username, ivProfileAvatar);
+        setAppUserAvatar(activity, username, imageView);
     }
 
     /**
      * 从本地服务器获取当前用户信息(昵称)
      *
-     * @param currentAppUserNick
+     * @param textView
      */
-    public static void setCurrentAppUserNick(TextView currentAppUserNick) {
+    public static void setCurrentAppUserNick(TextView textView) {
         String username = EMClient.getInstance().getCurrentUser();
-        setAppUserNick(username, currentAppUserNick);
+        setAppUserNick(username, textView);
 
     }
 
     /**
-     * 获取微信号
+     * 环信服务器获取微信号
      *
      * @param textView
      */
     public static void setCurrentAppUserName(TextView textView) {
         String username = EMClient.getInstance().getCurrentUser();
-        setAppUserName(" ", username, textView);
+        setAppUserName("微信号 ：", username, textView);
+    }
+
+    /**
+     * 本地服务器获取微信号
+     * @param username
+     * @param textView
+     */
+    public static void setAppUserNameWithNo(String username, TextView textView) {
+        setAppUserName("微信号 : ",username,textView);
+    }
+
+    /**
+     * 环信服务器获取微信号
+     * @param textView
+     */
+    public static void setCurrentAppUserNameWithNo(TextView textView) {
+        String username = EMClient.getInstance().getCurrentUser();
+        setAppUserName("",username,textView);
     }
 
     private static void setAppUserName(String suffix, String username, TextView textView) {
         textView.setText(suffix + username);
     }
 
-    public static User getCurrentAppUserInfo() {
-        String username = EMClient.getInstance().getCurrentUser();
-        if(userProvider!=null){
-            return  userProvider.getAppUser(username);
-        }
-        return null;
-    }
 }
