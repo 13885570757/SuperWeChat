@@ -170,10 +170,7 @@ public class EaseUserUtils {
         setAppUserName("微信号 : ",username,textView);
     }
 
-    /**
-     * 环信服务器获取微信号
-     * @param textView
-     */
+
     public static void setCurrentAppUserNameWithNo(TextView textView) {
         String username = EMClient.getInstance().getCurrentUser();
         setAppUserName("",username,textView);
