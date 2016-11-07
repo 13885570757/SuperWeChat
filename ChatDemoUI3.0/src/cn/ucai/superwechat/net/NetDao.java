@@ -105,10 +105,13 @@ public class NetDao {
      * @param
      */
     public static void updateAvatar(Context mContext, String userName, File file, OkHttpUtils.OnCompleteListener<String>listener) {
-        OkHttpUtils<String> uitls = new OkHttpUtils<>(mContext);
-        uitls.setRequestUrl(I.REQUEST_UPDATE_AVATAR)
-                .addParam(I.User.USER_NAME,userName)
+        OkHttpUtils<String> utils = new OkHttpUtils<>(mContext);
+        utils.setRequestUrl(I.REQUEST_UPDATE_AVATAR)
+                .addParam(I.NAME_OR_HXID,userName)
+                .addParam(I.AVATAR_TYPE,I.AVATAR_TYPE_USER_PATH)
+                .addFile2(file)
                 .targetClass(String.class)
+                .post()
                 .execute(listener);
     }
 }
