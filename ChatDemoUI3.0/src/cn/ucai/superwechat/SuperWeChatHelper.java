@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.db.InviteMessgeDao;
 import cn.ucai.superwechat.db.SuperWeChatDBManager;
 import cn.ucai.superwechat.db.UserDao;
@@ -55,6 +56,8 @@ import cn.ucai.superwechat.domain.EmojiconExampleGroupData;
 import cn.ucai.superwechat.domain.InviteMessage;
 import cn.ucai.superwechat.domain.InviteMessage.InviteMesageStatus;
 import cn.ucai.superwechat.domain.RobotUser;
+import cn.ucai.superwechat.net.NetDao;
+import cn.ucai.superwechat.net.OkHttpUtils;
 import cn.ucai.superwechat.parse.UserProfileManager;
 import cn.ucai.superwechat.receiver.CallReceiver;
 import cn.ucai.superwechat.ui.ChatActivity;
@@ -63,6 +66,7 @@ import cn.ucai.superwechat.ui.VideoCallActivity;
 import cn.ucai.superwechat.ui.VoiceCallActivity;
 import cn.ucai.superwechat.utils.L;
 import cn.ucai.superwechat.utils.PreferenceManager;
+import cn.ucai.superwechat.utils.ResultUtils;
 
 public class SuperWeChatHelper {
     /**
@@ -617,6 +621,33 @@ public class SuperWeChatHelper {
             }
             toAddUsers.put(username, user);
             localUsers.putAll(toAddUsers);
+
+            Map<String ,User> localAppUsers = getAppContactList();
+
+            /**
+             * 好友关系上传到服务器
+             */
+            if (!localAppUsers.containsKey(username)){
+                NetDao.addContact(appContext, EMClient.getInstance().
+                        getCurrentUser(), username, new OkHttpUtils.OnCompleteListener<String>() {
+                    @Override
+                    public void onSuccess(String s) {
+                        if(s!=null){
+                            Result result = ResultUtils.getResultFromJson(s,User.class);
+                            if (result!=null&&result.isRetMsg()){
+                                User u = (User) result.getRetData();
+                                saveAppContact(u);
+                                broadcastManager.sendBroadcast(new Intent(Constant.ACTION_CONTACT_CHANAGED));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
+            }
 
             broadcastManager.sendBroadcast(new Intent(Constant.ACTION_CONTACT_CHANAGED));
         }
