@@ -145,4 +145,19 @@ public class EaseUserUtils {
     public static void setAppUserName(String suffix, String username, TextView textView) {
         textView.setText(suffix + username);
     }
+
+    public static void setAppUserPathAvatar (Context context,String path,ImageView imageView){
+        if (path!=null){
+            try {
+                int avatarResId = Integer.parseInt(path);
+                Glide.with(context).load(avatarResId).into(imageView);
+            }
+            catch (Exception e){
+                Glide.with(context).load(path).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_default_avatar);
+            }
+        }else {
+            Glide.with(context).load(R.drawable.ease_default_avatar).into(imageView);
+        }
+
+    }
 }
