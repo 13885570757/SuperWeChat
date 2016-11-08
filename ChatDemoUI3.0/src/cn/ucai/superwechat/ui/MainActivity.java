@@ -100,6 +100,10 @@ public class MainActivity extends BaseActivity
     // user account was removed
     private boolean isCurrentAccountRemoved = false;
 
+    private ContactListFragment contactListFragment;
+
+    private int currentTabIndex;
+
     MainTabAdapter adapter;
     TitlePopup mTitlePopup;
 
@@ -120,6 +124,7 @@ public class MainActivity extends BaseActivity
         ButterKnife.bind(this);
         // runtime permission for android 6.0, just require all permissions here for simple
         requestPermissions();
+        contactListFragment = new ContactListFragment();
 
         initView();
         umeng();
@@ -334,16 +339,16 @@ public class MainActivity extends BaseActivity
             public void onReceive(Context context, Intent intent) {
                 updateUnreadLabel();
                 updateUnreadAddressLable();
-//                if (currentTabIndex == 0) {
-//                    // refresh conversation list
-//                    if (conversationListFragment != null) {
-//                        conversationListFragment.refresh();
-//                    }
-//                } else if (currentTabIndex == 1) {
-//                    if (contactListFragment != null) {
-//                        contactListFragment.refresh();
-//                    }
-//                }
+               if (currentTabIndex == 1) {
+                    // refresh conversation list
+                    if (conversationListFragment != null) {
+                        conversationListFragment.refresh();
+                    }
+                } else if (currentTabIndex == 1) {
+                    if (contactListFragment != null) {
+                        contactListFragment.refresh();
+                    }
+                }
                 String action = intent.getAction();
                 if (action.equals(Constant.ACTION_GROUP_CHANAGED)) {
                     if (EaseCommonUtils.getTopActivity(MainActivity.this).equals(GroupsActivity.class.getName())) {
@@ -478,11 +483,11 @@ public class MainActivity extends BaseActivity
             public void run() {
                 int count = getUnreadAddressCountTotal();
                 L.e(TAG,"=========updateUnreadAddressLable"+count);
-//                if (count > 0) {
-//                    unreadAddressLable.setVisibility(View.VISIBLE);
-//                } else {
-//                    unreadAddressLable.setVisibility(View.INVISIBLE);
-//                }
+                if (count > 0) {
+                    mLayoutTabhost.setHasNew(1,true);
+                } else {
+                    mLayoutTabhost.setHasNew(1,false);
+                }
             }
         });
 
