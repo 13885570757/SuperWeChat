@@ -76,7 +76,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
         initView();
         initListener();
         user = EaseUserUtils.getCurrentAppUserInfo();
-        L.e(TAG, "===============onCreate" + user);
+        L.e(TAG, "===============onCreate：  " + user);
     }
 
     private void initView() {

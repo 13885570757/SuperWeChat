@@ -9,6 +9,7 @@ import com.hyphenate.easeui.domain.User;
 import cn.ucai.superwechat.I;
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.ui.AddContactActivity;
+import cn.ucai.superwechat.ui.AddFriendActivity;
 import cn.ucai.superwechat.ui.FriendProfileActivity;
 import cn.ucai.superwechat.ui.LoginActivity;
 import cn.ucai.superwechat.ui.RegisterActivity;
@@ -38,6 +39,10 @@ public class MFGT {
         intent.setClass(context, cls);
         context.startActivity(intent);
         context.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+    }
+    public static void startActivity(Context context,Intent intent){
+        context.startActivity(intent);
+        ((Activity)context).overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
     }
 
     /**
@@ -90,5 +95,17 @@ public class MFGT {
         intent.setClass(context,FriendProfileActivity.class);
         intent.putExtra(I.User.USER_NAME,user);
         startActivity(context, intent);
+    }
+
+    /**
+     * 添加好友
+     * @param context
+     * @param username
+     */
+    public static void gotoAddFirentMsg(Activity context, String username) {
+    Intent intent = new Intent();
+        intent.setClass(context, AddFriendActivity.class);
+        intent.putExtra(I.User.USER_NAME,username);
+        startActivity(context,intent);
     }
 }

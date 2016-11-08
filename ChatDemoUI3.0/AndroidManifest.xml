@@ -482,6 +482,8 @@
         </activity>
         <activity android:name=".ui.FriendProfileActivity">
         </activity>
+        <activity android:name=".ui.AddFriendActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -124,6 +124,7 @@ public class EaseUserUtils {
                 textView.setText(user.getMUserNick());
             } else {
                 textView.setText(username);
+                Log.e(TAG, "user2=" + user);
             }
         }
     }
