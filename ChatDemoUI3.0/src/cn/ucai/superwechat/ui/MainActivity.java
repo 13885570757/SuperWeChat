@@ -66,6 +66,7 @@ import cn.ucai.superwechat.dialog.TitleMenu.ActionItem;
 import cn.ucai.superwechat.dialog.TitleMenu.TitlePopup;
 import cn.ucai.superwechat.runtimepermissions.PermissionsManager;
 import cn.ucai.superwechat.runtimepermissions.PermissionsResultAction;
+import cn.ucai.superwechat.utils.L;
 import cn.ucai.superwechat.utils.MFGT;
 import cn.ucai.superwechat.widget.DMTabHost;
 import cn.ucai.superwechat.widget.MFViewPager;
@@ -246,7 +247,7 @@ public class MainActivity extends BaseActivity
                 case 0:
                     break;
                 case 1://添加好友
-                    MFGT.gotoAddFirent(MainActivity.this);
+                    MFGT.gotoAddFrient(MainActivity.this);
                     break;
                 case 2:
                     break;
@@ -476,6 +477,7 @@ public class MainActivity extends BaseActivity
         runOnUiThread(new Runnable() {
             public void run() {
                 int count = getUnreadAddressCountTotal();
+                L.e(TAG,"=========updateUnreadAddressLable"+count);
 //                if (count > 0) {
 //                    unreadAddressLable.setVisibility(View.VISIBLE);
 //                } else {

@@ -87,8 +87,8 @@ public class FriendProfileActivity extends BaseActivity {
      */
     private void setUserInfo() {
         EaseUserUtils.setAppUserAvatar(this, user.getMUserName(), profileImage);
-        EaseUserUtils.setAppUserNick(user.getMUserNick(), tvUserinfoNick);
-        EaseUserUtils.setAppUserNameWithNo(user.getMUserNick(), tvUserinfoName);
+        EaseUserUtils.setAppUserNick(user.getMUserName(), tvUserinfoNick);
+        EaseUserUtils.setAppUserNameWithNo(user.getMUserName(), tvUserinfoName);
     }
 
     @OnClick(R.id.img_back)
@@ -102,7 +102,7 @@ public class FriendProfileActivity extends BaseActivity {
             case R.id.txt_right:
                 break;
             case R.id.btn_add_contact://添加好友
-                MFGT.gotoAddFirentMsg(this, user.getMUserName());
+                MFGT.gotoAddFrientMsg(this, user.getMUserName());
                 break;
             case R.id.btn_send_msg://发送消息
                 break;

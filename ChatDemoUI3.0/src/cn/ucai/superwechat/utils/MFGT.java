@@ -81,7 +81,7 @@ public class MFGT {
      * 跳转到添加好友页面
      * @param context
      */
-    public static void gotoAddFirent(Activity context) {
+    public static void gotoAddFrient(Activity context) {
         startActivity(context, AddContactActivity.class);
     }
 
@@ -102,7 +102,7 @@ public class MFGT {
      * @param context
      * @param username
      */
-    public static void gotoAddFirentMsg(Activity context, String username) {
+    public static void gotoAddFrientMsg(Activity context, String username) {
     Intent intent = new Intent();
         intent.setClass(context, AddFriendActivity.class);
         intent.putExtra(I.User.USER_NAME,username);
