@@ -169,13 +169,13 @@ public class AddContactActivity extends BaseActivity {
         }).start();
     }
 
-    @OnClick({R.id.img_back, R.id.img_right})
+    @OnClick({R.id.img_back, R.id.txt_right})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
                 MFGT.finish(this);
                 break;
-            case R.id.img_right:
+            case R.id.txt_right:
                 searchContact();
                 break;
         }

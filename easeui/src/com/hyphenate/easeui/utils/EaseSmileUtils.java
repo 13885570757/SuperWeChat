@@ -70,7 +70,7 @@ public class EaseSmileUtils {
 	public static final String ee_34 = "[(W)]";
 	public static final String ee_35 = "[(D)]";
 	
-	private static final Factory spannableFactory = Spannable.Factory
+	private static final Factory spannableFactory = Factory
 	        .getInstance();
 	
 	private static final Map<Pattern, Object> emoticons = new HashMap<Pattern, Object>();

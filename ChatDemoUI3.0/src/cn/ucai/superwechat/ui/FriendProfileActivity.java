@@ -67,7 +67,7 @@ public class FriendProfileActivity extends BaseActivity {
      * 判断是否为好友状态
      */
     public void isFriend() {
-        if (SuperWeChatHelper.getInstance().getAppContatList().containsKey(user.getMUserName())) {
+        if (SuperWeChatHelper.getInstance().getAppContactList().containsKey(user.getMUserName())) {
             btnSendMsg.setVisibility(View.VISIBLE);
             btnSendVideo.setVisibility(View.VISIBLE);
         } else {

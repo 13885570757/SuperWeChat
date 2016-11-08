@@ -123,8 +123,7 @@ public class NetDao {
      * @param username
      * @param listener
      */
-    public static void searchUser(Context context, String username, OkHttpUtils.
-            OnCompleteListener<String> listener) {
+    public static void searchUser(Context context, String username, OkHttpUtils.OnCompleteListener<String> listener) {
         OkHttpUtils<String> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_FIND_USER)
                 .addParam(I.User.USER_NAME, username)
