@@ -80,6 +80,14 @@ public class UserDao {
     }
 
     /**
+     * 删除本地服务器好友关系
+     * @param username
+     */
+    public void deleteAppContact(String username) {
+        SuperWeChatDBManager.getInstance().deleteContact(username);
+    }
+
+    /**
      * save a contact
      * @param user
      */

@@ -652,12 +652,20 @@ public class SuperWeChatHelper {
             broadcastManager.sendBroadcast(new Intent(Constant.ACTION_CONTACT_CHANAGED));
         }
 
+        /**
+         * 好友接受到删除信息（服务器上非好友关系，也会删除自身数据库的好友关系）
+          * @param username
+         */
         @Override
-        public void onContactDeleted(String username) {
+        public void onContactDeleted(final String username) {
             Map<String, EaseUser> localUsers = SuperWeChatHelper.getInstance().getContactList();
+           //删除列表
             localUsers.remove(username);
             userDao.deleteContact(username);
+            //删除聊天记录
             inviteMessgeDao.deleteMessage(username);
+            //删除好友关系
+            SuperWeChatHelper.getInstance().delAppContact(username);
 
             broadcastManager.sendBroadcast(new Intent(Constant.ACTION_CONTACT_CHANAGED));
         }
@@ -1352,5 +1360,15 @@ public class SuperWeChatHelper {
         ArrayList<User> mList = new ArrayList<User>();
         mList.addAll(appContactList.values());
         demoModel.saveAppContactList(mList);
+    }
+
+    /**
+     * 删除内存和数据库好友关系
+     * @param username
+     */
+    public void delAppContact(String username){
+        getAppContactList().remove(username);//删除内存
+        demoModel.delAppContact(username);//删除数据库
+
     }
 }

@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.domain.EaseUser;
+import com.hyphenate.easeui.domain.User;
 import com.hyphenate.easeui.ui.EaseContactListFragment;
 import com.hyphenate.util.EMLog;
 import com.hyphenate.util.NetUtils;
@@ -38,8 +39,12 @@ import java.util.Map;
 
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.SuperWeChatHelper;
+import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.db.InviteMessgeDao;
 import cn.ucai.superwechat.db.UserDao;
+import cn.ucai.superwechat.net.NetDao;
+import cn.ucai.superwechat.net.OkHttpUtils;
+import cn.ucai.superwechat.utils.ResultUtils;
 import cn.ucai.superwechat.widget.ContactItemView;
 
 /**
@@ -237,6 +242,27 @@ public class ContactListFragment extends EaseContactListFragment {
 		pd.setMessage(st1);
 		pd.setCanceledOnTouchOutside(false);
 		pd.show();
+
+        NetDao.delContact(getActivity(), EMClient.getInstance().getCurrentUser(),
+                tobeDeleteUser.getUsername(), new OkHttpUtils.OnCompleteListener<String>() {
+                    @Override
+                    public void onSuccess(String s) {
+                        if(s!=null){
+                            Result result = ResultUtils.getResultFromJson(s,User.class);
+                            if (result!=null&&result.isRetMsg()){
+                                //删除内存和数据库中的数据（好友关系）
+                               SuperWeChatHelper.getInstance().delAppContact(tobeDeleteUser.getUsername());
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
+
 		new Thread(new Runnable() {
 			public void run() {
 				try {

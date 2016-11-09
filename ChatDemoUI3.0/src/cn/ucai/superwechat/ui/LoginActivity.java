@@ -165,7 +165,7 @@ public class LoginActivity extends BaseActivity {
             }
         });
         pd.setMessage(getString(R.string.Is_landing));
-        pd.show();
+//        pd.show();
 
         loginEMServer();//登录方法
 

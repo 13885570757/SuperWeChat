@@ -312,12 +312,12 @@ public class MainActivity extends BaseActivity
             public void run() {
                 // refresh unread count
                 updateUnreadLabel();
-//                if (currentTabIndex == 0) {
-//                    // refresh conversation list
-//                    if (conversationListFragment != null) {
-//                        conversationListFragment.refresh();
-//                    }
-//                }
+                if (currentTabIndex == 0) {
+                    // refresh conversation list
+                    if (conversationListFragment != null) {
+                        conversationListFragment.refresh();
+                    }
+                }
             }
         });
     }
@@ -466,7 +466,7 @@ public class MainActivity extends BaseActivity
      */
     public void updateUnreadLabel() {
         int count = getUnreadMsgCountTotal();
-//        if (count > 0) {
+ //       if (count > 0) {
 //            unreadLabel.setText(String.valueOf(count));
 //            unreadLabel.setVisibility(View.VISIBLE);
 //        } else {
