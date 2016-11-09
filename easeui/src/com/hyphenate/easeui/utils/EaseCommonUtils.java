@@ -148,9 +148,8 @@ public class EaseCommonUtils {
 	
 	/**
      * set initial letter of according user's nickname( username if no nickname)
-     * 
      * @param user
-     * @param user
+     *
      */
     public static void setUserInitialLetter(EaseUser user) {
         final String DefaultLetter = "#";

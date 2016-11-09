@@ -175,11 +175,14 @@ public class EaseContactAdapter extends ArrayAdapter<EaseUser> implements Sectio
                 final ArrayList<EaseUser> newValues = new ArrayList<EaseUser>();
                 for(int i=0;i<count;i++){
                     final EaseUser user = mOriginalList.get(i);
+                    //根据昵称和用户名查找
+                    String nickname = user.getNickname();
                     String username = user.getUsername();
                     
-                    if(username.startsWith(prefixString)){
+                    if(username.contains(prefixString)||nickname.contains(prefixString)){
                         newValues.add(user);
                     }
+                    //根据昵称和用户名查找
                     else{
                          final String[] words = username.split(" ");
                          final int wordCount = words.length;
