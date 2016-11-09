@@ -472,6 +472,8 @@ public class MainActivity extends BaseActivity
 //        } else {
 //            unreadLabel.setVisibility(View.INVISIBLE);
 //        }
+        //获取未读消息总数
+        mLayoutTabhost.setUnreadCount(0,count);
     }
 
     /**
