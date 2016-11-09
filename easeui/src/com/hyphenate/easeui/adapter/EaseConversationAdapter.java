@@ -118,9 +118,13 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
             holder.name.setText(room != null && !TextUtils.isEmpty(room.getName()) ? room.getName() : username);
             holder.motioned.setVisibility(View.GONE);
         }else {
-            EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
-            EaseUserUtils.setUserNick(username, holder.name);
+//            EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
+//            EaseUserUtils.setUserNick(username, holder.name);
+            //聊天界面显示好友头像
+            EaseUserUtils.setAppUserAvatar(getContext(),username,holder.avatar);
+            EaseUserUtils.setAppUserNick(username,holder.name);
             holder.motioned.setVisibility(View.GONE);
+
         }
 
         if (conversation.getUnreadMsgCount() > 0) {
