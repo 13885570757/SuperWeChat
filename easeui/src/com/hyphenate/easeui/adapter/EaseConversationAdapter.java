@@ -20,7 +20,7 @@ import com.hyphenate.chat.EMConversation.EMConversationType;
 import com.hyphenate.chat.EMGroup;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.R;
-import com.hyphenate.easeui.domain.EaseUser;
+import com.hyphenate.easeui.domain.User;
 import com.hyphenate.easeui.model.EaseAtMessageHelper;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.easeui.utils.EaseSmileUtils;
@@ -227,6 +227,7 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
             if (mOriginalValues == null) {
                 mOriginalValues = new ArrayList<EMConversation>();
             }
+
             if (prefix == null || prefix.length() == 0) {
                 results.values = copyConversationList;
                 results.count = copyConversationList.size();
@@ -243,10 +244,10 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
                     if(group != null){
                         username = group.getGroupName();
                     }else{
-                        EaseUser user = EaseUserUtils.getUserInfo(username);
-                        // TODO: not support Nick anymore
-//                        if(user != null && user.getNick() != null)
-//                            username = user.getNick();
+                        User user = EaseUserUtils.getAppUserInfo(username);
+                        // 通过昵称搜索好友列表的好友
+                        if(user != null && user.getMUserNick() != null)
+                            username = user.getMUserNick();
                     }
 
                     // First match against the whole ,non-splitted value

@@ -124,7 +124,7 @@ public abstract class EaseChatRow extends LinearLayout {
 //            EaseUserUtils.setUserNick(message.getFrom(), usernickView);
             EaseUserUtils.setAppUserAvatar(context, message.getFrom(), userAvatarView);
             EaseUserUtils.setAppUserNick(message.getFrom(), usernickView);
-            //修改聊天界面用户头像和昵称
+            //---修改聊天界面用户头像和昵称
         }
         
         if(deliveredView != null){

@@ -1130,6 +1130,37 @@ public class SuperWeChatHelper {
         }
 
         isSyncingContactsWithServer = true;
+        /**
+         * 加载本地服务器好友关系
+         */
+        NetDao.loadContact(appContext, new OkHttpUtils.OnCompleteListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+            if(s!=null){
+                Result result = ResultUtils.getResultFromJson(s,User.class);
+                if (result!=null&&result.isRetMsg()){
+                    List<User>list = (List<User>) result.getRetData();
+                    if (list!=null&&list.size()>0){
+                    L.e("==========SuperWeChatHelper===loadContact"+list.size());
+                    Map<String ,User> userlist = new HashMap<String, User>();
+                    for (User user :list){
+                        EaseCommonUtils.setAppUserInitialLetter(user);
+                        userlist.put(getCurrentUsernName(),user);
+                        L.e("==========SuperWeChatHelper===loadContact"+getCurrentUsernName());
+                    }
+                        getAppContactList().clear();//清空内存
+                        getAppContactList().putAll(userlist);//放入数据
+                    }
+
+                }
+            }
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
 
         new Thread() {
             @Override
