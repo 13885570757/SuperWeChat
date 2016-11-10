@@ -149,5 +149,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="User_name_cannot_be_modify">用户名不能被修改</string>
     <string name="toast_nick_not_modify">昵称未修改</string>
+    <string name="groups_avatar">群组头像</string>
 
 </resources>

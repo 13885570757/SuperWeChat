@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="toast_nick_not_modify">昵称未修改</string>
+    <string name="groups_avatar">群组头像</string>
 </resources>

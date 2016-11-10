@@ -5,6 +5,8 @@
     android:background="#eee"
     android:orientation="vertical" >
 
+    <include layout="@layout/view_title_bar"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_top_bar"
@@ -35,12 +37,12 @@
             android:textSize="20sp" />
 
         <Button
+            android:id="@+id/group_save"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@drawable/ease_common_tab_bg"
-            android:onClick="save"
             android:text="@string/button_save"
             android:textColor="#fff"
             android:textSize="18sp" />
@@ -71,8 +73,41 @@
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
         android:textSize="18sp" />
-    
-    
+    <RelativeLayout
+        android:id="@+id/rl_groups_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/em_button_normal_shape"
+        >
+        <TextView
+            android:id="@+id/tv_groups_avatar"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/groups_avatar"
+            android:textColor="#333"
+            android:layout_centerVertical="true"
+            android:textSize="18sp"
+            />
+
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/iv_groups_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ease_group_icon"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
+
+
     <LinearLayout 
         android:layout_width="match_parent"
        android:layout_height="39dp"

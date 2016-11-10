@@ -242,7 +242,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
                 break;
             case REQUESTCODE_CUTTING:
                 if (data != null) {
-                    //setPicToView(data);
+                    setPicToView(data);
                     updateAppUserAvatar(data);
                 }
                 break;
@@ -321,17 +321,17 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
      */
     private void setPicToView(Intent picdata) {
         Bundle extras = picdata.getExtras();
-        if (extras != null) {
-            Bitmap photo = extras.getParcelable("data");
-            Drawable drawable = new BitmapDrawable(getResources(), photo);
-            ivUserinfoAvatar.setImageDrawable(drawable);
-            dialog.dismiss();
-            Toast.makeText(UserProfileActivity.this, getString(R.string.toast_updatephoto_success),
-                    Toast.LENGTH_SHORT).show();
-         //   uploadUserAvatar(Bitmap2Bytes(photo));
-        }
-
+    if (extras != null) {
+        Bitmap photo = extras.getParcelable("data");
+        Drawable drawable = new BitmapDrawable(getResources(), photo);
+        ivUserinfoAvatar.setImageDrawable(drawable);
+        dialog.dismiss();
+        Toast.makeText(UserProfileActivity.this, getString(R.string.toast_updatephoto_success),
+                Toast.LENGTH_SHORT).show();
+        //   uploadUserAvatar(Bitmap2Bytes(photo));
     }
+
+}
 
     /**
      * 环信服务器更新用户头像
